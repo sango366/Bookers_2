@@ -1,0 +1,28 @@
+<%= notice %>
+<% if book.errors.any? %>
+<%= book.errors.count %>error
+<% book.errors.full_messages.each do |message| %>
+<%= message %>
+<% end %>
+<% end %>
+
+<div class="container">
+<div class="row">
+<div class="col-xs-3">
+<h1>User info</h1>
+<h3 class="profile-name"><%= user.name %></h3> <!--ここはUserモデルから、直接情報を持ってきている。だから、情報を渡してあげないとエラーになる-->
+<h4 class="profile-introduction"><%= user.introduction %></h4>
+<p class="col-xs-12"><%= attachment_image_tag user, :profile_image, size: '60x60', fallback: "no_image.jpg" %></p>
+<br>
+<%= link_to edit_user_path(user), class: 'btn btn-default' do %>
+<span class="glyphicon glyphicon-wrench" aria-hidden="true"></span>
+<% end %>
+<h2>New book</h2>
+<%= form_for(@book) do |f| %>
+<h4>title</h4>
+<%= f.text_field :title %>
+<h4>Opinion</h4>
+<%= f.text_area :body %>
+<%= f.submit  %>
+<% end %> <!--formで＠bookにおくっている。コントローラーがuserbookがあるのにどうしてと、form_forは略されている。タイトルがカラムとボディが含まれるカラムだと認定して、自動で、それでそのため、ここだke books controllerが聴く。form_for　urlでどこに飛ばすかで手動で決められる。updateのcreateかは、インスタンスに情報があるかないかで判定する。もし、@bookに情報があればmupdate、空だったら、勝手に判定してくれうる。create だと。、 -->
+</div>
